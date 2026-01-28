@@ -4,6 +4,7 @@ import { useState, useCallback, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDropzone } from 'react-dropzone';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useProcess } from '@/contexts/ProcessContext';
 import Navbar from '@/components/Navbar';
 import styles from './page.module.css';
@@ -17,6 +18,7 @@ export default function NovoProcessoPage() {
   const [processing, setProcessing] = useState(false);
 
   const { isAuthenticated } = useAuth();
+  const { t } = useLanguage();
   const { addProcess } = useProcess();
   const router = useRouter();
 
@@ -58,17 +60,17 @@ export default function NovoProcessoPage() {
     setError('');
 
     if (!processName.trim()) {
-      setError('Digite um nome para o processo seletivo');
+      setError(t('newProcess.errors.processName'));
       return;
     }
 
     if (keywords.length === 0) {
-      setError('Adicione pelo menos uma palavra-chave');
+      setError(t('newProcess.errors.keywords'));
       return;
     }
 
     if (files.length === 0) {
-      setError('Faça upload de pelo menos um currículo');
+      setError(t('newProcess.errors.resumes'));
       return;
     }
 
@@ -127,9 +129,9 @@ export default function NovoProcessoPage() {
           <div className={styles.content}>
             <div className={styles.form}>
               <div className={styles.processing}>
-                <h2 className={styles.processingTitle}>Processando Currículos</h2>
+                <h2 className={styles.processingTitle}>{t('newProcess.processingTitle')}</h2>
                 <p className={styles.processingText}>
-                  A IA está analisando os currículos com base nas palavras-chave fornecidas...
+                  {t('newProcess.processingText')}
                 </p>
                 <div className={styles.spinner}></div>
               </div>
@@ -145,14 +147,14 @@ export default function NovoProcessoPage() {
       <Navbar />
       <div className={styles.container}>
         <div className={styles.content}>
-          <h1 className={styles.title}>NOVO PROCESSO SELETIVO</h1>
+          <h1 className={styles.title}>{t('newProcess.title')}</h1>
 
           <form onSubmit={handleSubmit} className={styles.form}>
             {error && <div className={styles.error}>{error}</div>}
 
             <div className={styles.inputGroup}>
               <label htmlFor="processName" className={styles.label}>
-                Nome do Processo Seletivo
+                {t('newProcess.processName')}
               </label>
               <input
                 id="processName"
@@ -160,13 +162,13 @@ export default function NovoProcessoPage() {
                 value={processName}
                 onChange={(e) => setProcessName(e.target.value)}
                 className={styles.input}
-                placeholder="Ex: Desenvolvedor Full Stack - 2024"
+                placeholder={t('newProcess.processNamePlaceholder')}
               />
             </div>
 
             <div className={styles.inputGroup}>
               <label htmlFor="keywords" className={styles.label}>
-                Palavras-chave / Skills
+                {t('newProcess.keywords')}
               </label>
 
               {keywords.length > 0 && (
@@ -193,13 +195,13 @@ export default function NovoProcessoPage() {
                 onChange={(e) => setKeywordInput(e.target.value)}
                 onKeyDown={handleAddKeyword}
                 className={styles.input}
-                placeholder="Digite uma palavra-chave e pressione Enter"
+                placeholder={t('newProcess.keywordsPlaceholder')}
               />
             </div>
 
             <div className={styles.inputGroup}>
               <label className={styles.label}>
-                Upload de Currículos
+                {t('newProcess.uploadSection')}
               </label>
 
               <div
@@ -211,12 +213,12 @@ export default function NovoProcessoPage() {
                   <div className={styles.uploadIcon}>📄</div>
                   <p className={styles.dropzoneText}>
                     {isDragActive
-                      ? 'Solte os arquivos aqui...'
-                      : 'Arraste currículos aqui ou clique para selecionar'
+                      ? t('newProcess.dropHere')
+                      : t('newProcess.dropzoneText')
                     }
                   </p>
                   <p className={styles.dropzoneHint}>
-                    Formatos aceitos: PDF, TXT
+                    {t('newProcess.acceptedFormats')}
                   </p>
                 </div>
               </div>
@@ -244,7 +246,7 @@ export default function NovoProcessoPage() {
               className={styles.submitButton}
               disabled={processing}
             >
-              Iniciar Processo Seletivo
+              {t('newProcess.startProcess')}
             </button>
           </form>
         </div>

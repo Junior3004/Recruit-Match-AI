@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useProcess } from '@/contexts/ProcessContext';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
@@ -10,6 +11,7 @@ import styles from './home.module.css';
 export default function Home() {
   const { isAuthenticated } = useAuth();
   const { processes } = useProcess();
+  const { t } = useLanguage();
   const router = useRouter();
 
   useEffect(() => {
@@ -32,9 +34,9 @@ export default function Home() {
 
   const getStatusLabel = (status: string) => {
     const labels = {
-      pending: 'Pendente',
-      processing: 'Processando',
-      completed: 'Concluído'
+      pending: t('home.statusLabels.pending'),
+      processing: t('home.statusLabels.processing'),
+      completed: t('home.statusLabels.completed')
     };
     return labels[status as keyof typeof labels] || status;
   };
@@ -54,19 +56,19 @@ export default function Home() {
       <div className={styles.container}>
         <div className={styles.hero}>
           <h1 className={styles.title}>
-            INICIE UM NOVO PROCESSO SELETIVO
+            {t('home.heroTitle')}
           </h1>
           <button
             onClick={handleNewProcess}
             className={styles.startButton}
           >
-            Iniciar Novo Processo
+            {t('home.startButton')}
           </button>
         </div>
 
         {processes.length > 0 && (
           <div className={styles.processesList}>
-            <h2 className={styles.sectionTitle}>Processos Seletivos</h2>
+            <h2 className={styles.sectionTitle}>{t('home.processesList')}</h2>
             <div className={styles.processesGrid}>
               {processes.map((process) => (
                 <div
@@ -77,10 +79,10 @@ export default function Home() {
                   <h3 className={styles.processName}>{process.name}</h3>
 
                   <div className={styles.processInfo}>
-                    <span>📅 {new Date(process.createdAt).toLocaleDateString('pt-BR')}</span>
-                    <span>📄 {process.totalResumes} currículos enviados</span>
+                    <span>📅 {new Date(process.createdAt).toLocaleDateString()}</span>
+                    <span>📄 {process.totalResumes} {t('home.curriculumsUploaded')}</span>
                     {process.status === 'completed' && (
-                      <span>✅ {process.approvedResumes} aprovados</span>
+                      <span>✅ {process.approvedResumes} {t('home.approved')}</span>
                     )}
                   </div>
 

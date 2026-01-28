@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../auth.module.css';
@@ -12,6 +14,7 @@ export default function CadastroPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { register } = useAuth();
+  const { language, setLanguage, t } = useLanguage();
   const router = useRouter();
 
   const handleSubmit = (e: FormEvent) => {
@@ -19,12 +22,12 @@ export default function CadastroPage() {
     setError('');
 
     if (!name || !email || !password) {
-      setError('Preencha todos os campos');
+      setError(t('auth.register.errors.fillAllFields'));
       return;
     }
 
     if (password.length < 6) {
-      setError('A senha deve ter pelo menos 6 caracteres');
+      setError(t('auth.register.errors.passwordLength'));
       return;
     }
 
@@ -33,64 +36,89 @@ export default function CadastroPage() {
     if (success) {
       router.push('/');
     } else {
-      setError('Este email já está cadastrado');
+      setError(t('auth.register.errors.emailExists'));
     }
   };
 
   return (
     <div className={styles.container}>
+      <div className={styles.languageSelector}>
+        <button
+          onClick={() => setLanguage('en')}
+          className={`${styles.langButton} ${language === 'en' ? styles.langButtonActive : ''}`}
+        >
+          {t('common.english')}
+        </button>
+        <button
+          onClick={() => setLanguage('pt')}
+          className={`${styles.langButton} ${language === 'pt' ? styles.langButtonActive : ''}`}
+        >
+          {t('common.portuguese')}
+        </button>
+      </div>
+
       <div className={styles.card}>
-        <h1 className={styles.title}>Criar Conta</h1>
-        <p className={styles.subtitle}>Comece a gerenciar seus processos seletivos</p>
+        <div className={styles.logoContainer}>
+          <Image
+            src="/logo_1.png"
+            alt="HR Select Logo"
+            width={200}
+            height={200}
+            priority
+            className={styles.logo}
+          />
+        </div>
+        <h1 className={styles.title}>{t('auth.register.title')}</h1>
+        <p className={styles.subtitle}>{t('auth.register.subtitle')}</p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           {error && <div className={styles.error}>{error}</div>}
 
           <div className={styles.inputGroup}>
-            <label htmlFor="name" className={styles.label}>Nome Completo</label>
+            <label htmlFor="name" className={styles.label}>{t('auth.register.fullName')}</label>
             <input
               id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className={styles.input}
-              placeholder="Digite seu nome"
+              placeholder={t('auth.register.namePlaceholder')}
             />
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="email" className={styles.label}>Email</label>
+            <label htmlFor="email" className={styles.label}>{t('auth.register.email')}</label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.input}
-              placeholder="seu@email.com"
+              placeholder={t('auth.register.emailPlaceholder')}
             />
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="password" className={styles.label}>Senha</label>
+            <label htmlFor="password" className={styles.label}>{t('auth.register.password')}</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={styles.input}
-              placeholder="Mínimo 6 caracteres"
+              placeholder={t('auth.register.passwordPlaceholder')}
             />
           </div>
 
           <button type="submit" className={styles.button}>
-            Criar Conta
+            {t('auth.register.submitButton')}
           </button>
         </form>
 
         <div className={styles.footer}>
-          Já tem uma conta?{' '}
+          {t('auth.register.hasAccount')}{' '}
           <Link href="/login" className={styles.link}>
-            Fazer login
+            {t('auth.register.login')}
           </Link>
         </div>
       </div>

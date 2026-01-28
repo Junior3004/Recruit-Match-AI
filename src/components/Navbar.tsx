@@ -1,12 +1,15 @@
 'use client';
 
+import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
   const router = useRouter();
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -26,7 +29,14 @@ export default function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logo}>HR Select</div>
+      <Image
+        src="/logo_2.png"
+        alt="HR Select Logo"
+        width={200}
+        height={200}
+        priority
+        className={styles.navLogo}
+      />
 
       {user && (
         <div className={styles.userSection}>
@@ -44,7 +54,7 @@ export default function Navbar() {
                 className={`${styles.dropdownItem} ${styles.logoutButton}`}
                 onClick={handleLogout}
               >
-                Sair
+                {t('navbar.logout')}
               </div>
             </div>
           )}
