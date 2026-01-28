@@ -1,0 +1,6 @@
+Nome: Carlos Oliveira
+Cargo: Desenvolvedor Front-end
+Skills: HTML, CSS, JavaScript, React, Tailwind CSS.
+Experiência: Desenvolvedor junior focado em criar interfaces responsivas e acessíveis.
+Educação: Sistemas de Informação.
+Objetivo: Crescer profissionalmente dominando novas tecnologias de front-end.

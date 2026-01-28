@@ -1,0 +1,6 @@
+Nome: João Silva
+Cargo: Desenvolvedor Full Stack
+Skills: React, Node.js, TypeScript, SQL, Docker.
+Experiência: 5 anos desenvolvendo aplicações web modernas utilizando o ecossistema JavaScript.
+Educação: Ciência da Computação.
+Objetivo: Atuar em projetos desafiadores com foco em escalabilidade e performance.
