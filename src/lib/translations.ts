@@ -39,6 +39,9 @@ export const translations = {
       heroTitle: 'START A NEW SELECTION PROCESS',
       startButton: 'Start New Process',
       processesList: 'Selection Processes',
+      searchPlaceholder: 'Search processes...',
+      confirmDelete: 'Are you sure you want to delete this process? This action cannot be undone.',
+      deleteError: 'An error occurred while deleting the process. Please try again.',
       curriculumsUploaded: 'resumes uploaded',
       approved: 'approved',
       statusLabels: {
@@ -132,6 +135,9 @@ export const translations = {
       heroTitle: 'INICIE UM NOVO PROCESSO SELETIVO',
       startButton: 'Iniciar Novo Processo',
       processesList: 'Processos Seletivos',
+      searchPlaceholder: 'Buscar processos...',
+      confirmDelete: 'Você tem certeza que deseja excluir este processo? Esta ação não pode ser desfeita.',
+      deleteError: 'Ocorreu um erro ao excluir o processo. Por favor, tente novamente.',
       curriculumsUploaded: 'currículos enviados',
       approved: 'aprovados',
       statusLabels: {

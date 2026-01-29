@@ -16,6 +16,7 @@ interface ProcessContextType {
   processes: SelectiveProcess[];
   addProcess: (process: SelectiveProcess) => void;
   updateProcess: (id: string, updates: Partial<SelectiveProcess>) => void;
+  deleteProcess: (id: string) => void;
   getProcess: (id: string) => SelectiveProcess | undefined;
 }
 
@@ -46,12 +47,18 @@ export function ProcessProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('selectiveProcesses', JSON.stringify(updatedProcesses));
   };
 
+  const deleteProcess = (id: string) => {
+    const updatedProcesses = processes.filter(p => p.id !== id);
+    setProcesses(updatedProcesses);
+    localStorage.setItem('selectiveProcesses', JSON.stringify(updatedProcesses));
+  };
+
   const getProcess = (id: string) => {
     return processes.find(p => p.id === id);
   };
 
   return (
-    <ProcessContext.Provider value={{ processes, addProcess, updateProcess, getProcess }}>
+    <ProcessContext.Provider value={{ processes, addProcess, updateProcess, deleteProcess, getProcess }}>
       {children}
     </ProcessContext.Provider>
   );
