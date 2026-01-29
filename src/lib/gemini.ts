@@ -16,7 +16,7 @@ export async function analyzeResumeFile(
   keywords: string[]
 ): Promise<{ matches: boolean; score: number; foundKeywords: string[] }> {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     // Ler arquivo
     const fileData = readFileSync(filePath);
@@ -82,7 +82,7 @@ export async function analyzeResume(
   keywords: string[]
 ): Promise<{ matches: boolean; score: number; foundKeywords: string[] }> {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     const prompt = `Você é um analisador de currículos. Analise o currículo abaixo e verifique se contém EXATAMENTE estas palavras-chave:
 
