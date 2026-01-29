@@ -1,0 +1,25 @@
+==============================
+CURRÍCULO 07
+==============================
+Nome: Rafael Santos Oliveira  
+Idade: 27 anos  
+Cidade/Estado: Rio de Janeiro – RJ  
+Email: rafael.oliveira@email.com  
+Telefone: (21) 92222-7777  
+
+Objetivo:
+Desenvolvedor Front-end Júnior
+
+Formação:
+Análise e Desenvolvimento de Sistemas – Estácio (2020 – 2023)
+
+Experiência Profissional:
+Desenvolvedor Júnior – Startup Tech (2023 – 2024)
+- Desenvolvimento de interfaces
+- Manutenção de sites
+- Integração com APIs
+
+Habilidades:
+- HTML
+- CSS
+- JavaScript
